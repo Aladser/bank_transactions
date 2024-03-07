@@ -1,5 +1,6 @@
 import json
 
+
 def get_executed_money_orders(json_file):
     """получить выполненные переводы"""
     executed_orders = []
@@ -17,22 +18,22 @@ def get_executed_money_orders(json_file):
     return sorted_executed_orders
 
 
-def get_last_executed_money_orders(executed_operations, operation_count=5):
+def get_last_executed_money_orders(executed_orders, order_count=5):
     """получить последние переводы"""
     last_order_list = []
-    order_len = len(executed_operations)
+    order_len = len(executed_orders)
     if order_len < 5:
-        operation_count = order_len
+        order_count = order_len
 
-    for i in range(operation_count):
-        operation = executed_operations[i]
-        description = operation['description']
+    for i in range(order_count):
+        order = executed_orders[i]
+        description = order['description']
         # время
-        time_list = operation['date'][:10].split('-')
+        time_list = order['date'][:10].split('-')
         time_list = time_list[::-1]
-        time = '.'.join(time_list)
+        date = '.'.join(time_list)
         # from
-        from_name_list = operation['from'].split()
+        from_name_list = order['from'].split()
         # банковский счет
         bank_acc_from = from_name_list[-1]
         bank_acc_from_list = [bank_acc_from[i:i + 4] for i in range(0, len(bank_acc_from), 4)]
@@ -41,16 +42,15 @@ def get_last_executed_money_orders(executed_operations, operation_count=5):
         from_name_list.pop()
         from_name = ' '.join(from_name_list) + ' ' + bank_acc_from
         # to
-        to_name_list = operation['to'].split()
+        to_name_list = order['to'].split()
         bank_acc_to = '**' + to_name_list[-1][-4:]
         to_name_list.pop()
         to_name = f"{' '.join(to_name_list)} {bank_acc_to}"
-        # money
-        # итоговый массив одной операции
+        # сумма перевода
         last_order = [
-            f"{time} {description}",
+            f"{date} {description}",
             f"{from_name} -> {to_name}",
-            f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}"
+            f"{order['operationAmount']['amount']} {order['operationAmount']['currency']['name']}"
         ]
 
         last_order_list.append(last_order)
