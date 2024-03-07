@@ -1,6 +1,5 @@
 import json
 
-
 def get_executed_money_orders(json_file):
     """получить выполненные переводы"""
     executed_orders = []
@@ -11,7 +10,7 @@ def get_executed_money_orders(json_file):
         # фильтрация по наличию свойства state
         if 'state' in order:
             # фильтрация по state = EXECUTED и типу Перевод
-            if order['state'] == 'EXECUTED' and 'from' in order:
+            if order['state'] == 'EXECUTED' and 'Перевод' in order['description']:
                 executed_orders.append(order)
     # обратная сортировка по времени
     sorted_executed_orders = sorted(executed_orders, key=lambda x: x['date'], reverse=True)
