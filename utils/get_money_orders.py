@@ -21,6 +21,10 @@ def get_executed_money_orders(json_file):
 def get_last_executed_money_orders(executed_operations, operation_count=5):
     """получить последние переводы"""
     last_order_list = []
+    order_len = len(executed_operations)
+    if order_len < 5:
+        operation_count = order_len
+
     for i in range(operation_count):
         operation = executed_operations[i]
         description = operation['description']
