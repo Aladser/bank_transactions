@@ -3,6 +3,7 @@ import os
 from utils import *
 import unittest
 
+test_file_path = '/home/aladser/projects/account_transactions/data/test_operations.json'
 test_1_output = [{'id': 441945886, 'state': 'EXECUTED', 'date': '2019-08-26T10:50:58.294041',
                   'operationAmount': {'amount': '31957.58', 'currency': {'name': 'руб.', 'code': 'RUB'}},
                   'description': 'Перевод организации', 'from': 'Maestro 1596837868705199',
@@ -24,9 +25,7 @@ test_2_ouput = [
 
 class TestGetMoneyOrder(unittest.TestCase):
     def test_get_executed_money_orders(self):
-        self.assertEqual(
-            get_executed_money_orders('/home/aladser/projects/account_transactions/data/test_operations.json'),
-            test_1_output)
+        self.assertEqual(get_executed_money_orders(test_file_path), test_1_output)
 
     def test_get_last_executed_money_orders(self):
         self.assertEqual(get_last_executed_money_orders(test_1_output), test_2_ouput)
