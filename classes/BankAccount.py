@@ -6,7 +6,6 @@ class BankAccount:
 
     def __init__(self, transactions_file):
         self.transactions_file = transactions_file
-        self.get_executed_transactions()
 
     def get_executed_transactions(self):
         """получить выполненные операции"""
