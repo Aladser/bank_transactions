@@ -1,10 +1,10 @@
 from classes import BankAccount
 
-TRANSACTION_FILE = 'data/operations.json'
+TRANSACTIONS_FILE = 'data/operations.json'
 
 
 def main():
-    bank_account = BankAccount(TRANSACTION_FILE)
+    bank_account = BankAccount(TRANSACTIONS_FILE)
     for transaction in bank_account.get_last_executed_transactions():
         [print(str) for str in transaction]
         print()
