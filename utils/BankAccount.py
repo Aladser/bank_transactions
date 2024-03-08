@@ -32,18 +32,18 @@ class BankAccount:
         if order_len < 5:
             order_count = order_len
 
-        for i in range(order_count):
-            order = executed_transactions[i]
+        for index in range(order_count):
+            order = executed_transactions[index]
             if 'Открытие вклада' in order['description']:
-                last_order = self.__get_deposit_opening_info(order)
+                last_order = self.__parse_deposit_opening_info(order)
             elif 'Перевод' in order['description']:
-                last_order = self.__get_money_order_info(order)
+                last_order = self.__parse_money_order_info(order)
             else:
                 continue
             last_order_list.append(last_order)
         return last_order_list
 
-    def __get_deposit_opening_info(self, transaction):
+    def __parse_deposit_opening_info(self, transaction):
         """парсинг открытия счета"""
         date = self.__format_date(transaction['date'])
         to_name = self.__format_to_name(transaction['to'])
@@ -52,7 +52,7 @@ class BankAccount:
             to_name
         ]
 
-    def __get_money_order_info(self, order):
+    def __parse_money_order_info(self, order):
         """парсинг перевода"""
         # время
         date = self.__format_date(order['date'])
@@ -60,7 +60,7 @@ class BankAccount:
         from_name_list = order['from'].split()
         # банковский счет
         bank_acc_from = from_name_list[-1]
-        bank_acc_from_list = [bank_acc_from[i:i + 4] for i in range(0, len(bank_acc_from), 4)]
+        bank_acc_from_list = [bank_acc_from[index:index + 4] for index in range(0, len(bank_acc_from), 4)]
         bank_acc_from = f"{bank_acc_from_list[0]} {bank_acc_from_list[1][:2]}** **** {bank_acc_from_list[-1]}"
         # from
         from_name_list.pop()
