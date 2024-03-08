@@ -1,5 +1,5 @@
 import os, unittest
-from utils import BankAccount
+from classes import BankAccount
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 data_dir = f"{root_dir}/data/"

@@ -1,3 +1,3 @@
-from utils import BankAccount
+from classes import BankAccount
 
 BankAccount = BankAccount.BankAccount

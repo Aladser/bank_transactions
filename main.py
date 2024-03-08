@@ -1,4 +1,4 @@
-from utils import BankAccount
+from classes import BankAccount
 
 OPERATION_FILE = 'data/operations.json'
 
