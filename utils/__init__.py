@@ -1,1 +1,3 @@
-from utils.get_money_orders import *
+from utils import BankAccount
+
+BankAccount = BankAccount.BankAccount

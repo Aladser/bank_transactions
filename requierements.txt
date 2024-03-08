@@ -1,9 +1,0 @@
-Package    Version
----------- -------
-coverage   7.4.3
-iniconfig  2.0.0
-packaging  23.2
-pluggy     1.4.0
-pytest     8.0.2
-setuptools 68.2.0
-wheel      0.41.2
