@@ -1,13 +1,13 @@
-import utils
+from utils import BankAccount
 
 OPERATION_JSON_FILE = 'data/operations.json'
 
 
 def main():
-    executed_transactions = utils.get_executed_transactions(OPERATION_JSON_FILE)
-    last_executed_transactions = utils.get_last_executed_transactions(executed_transactions)
-    for order in last_executed_transactions:
-        [print(str) for str in order]
+    bank_account = BankAccount(OPERATION_JSON_FILE)
+
+    for operation in bank_account.get_last_executed_transactions():
+        [print(str) for str in operation]
         print()
 
 
