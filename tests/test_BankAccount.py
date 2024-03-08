@@ -1,7 +1,6 @@
 import os
-
-from utils import *
 import unittest
+from utils import *
 
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 data_dir = f"{root_dir}/data/"
@@ -27,8 +26,11 @@ test_2_ouput = [
 
 
 class TestGetMoneyOrder(unittest.TestCase):
+
     def test_get_executed_money_orders(self):
-        self.assertEqual(get_executed_money_orders(test_file_path), test_1_output)
+        bank_account = BankAccount(test_file_path)
+        self.assertEqual(bank_account.get_executed_transactions(), test_1_output)
 
     def test_get_last_executed_money_orders(self):
-        self.assertEqual(get_last_executed_money_orders(test_1_output), test_2_ouput)
+        bank_account = BankAccount(test_file_path)
+        self.assertEqual(bank_account.get_last_executed_transactions(), test_2_ouput)
