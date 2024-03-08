@@ -4,44 +4,44 @@ import json
 class BankAccount:
     """Банковский счет"""
 
-    def __init__(self, operations_file):
-        self.operations_file = operations_file
+    def __init__(self, transactions_file):
+        self.transactions_file = transactions_file
         self.get_executed_transactions()
 
     def get_executed_transactions(self):
         """получить выполненные операции"""
         executed_transactions = []
-        with open(self.operations_file) as file:
-            orders = json.load(file)
+        with open(self.transactions_file) as file:
+            transactions = json.load(file)
 
-        for order in orders:
+        for transaction in transactions:
             # фильтрация по наличию свойства state
-            if 'state' in order:
+            if 'state' in transaction:
                 # фильтрация по state = EXECUTED
-                if order['state'] == 'EXECUTED':
-                    executed_transactions.append(order)
+                if transaction['state'] == 'EXECUTED':
+                    executed_transactions.append(transaction)
         # обратная сортировка по времени
         sorted_executed_transactions = sorted(executed_transactions, key=lambda x: x['date'], reverse=True)
         return sorted_executed_transactions
 
-    def get_last_executed_transactions(self, order_count=5):
+    def get_last_executed_transactions(self, transaction_count=5):
         """получить последние операции"""
         executed_transactions = self.get_executed_transactions()
-        last_order_list = []
-        order_len = len(executed_transactions)
-        if order_len < 5:
-            order_count = order_len
+        last_transaction_list = []
+        transaction_list_len = len(executed_transactions)
+        if transaction_list_len < 5:
+            transaction_count = transaction_list_len
 
-        for index in range(order_count):
-            order = executed_transactions[index]
-            if 'Открытие вклада' in order['description']:
-                last_order = self.__parse_deposit_opening_info(order)
-            elif 'Перевод' in order['description']:
-                last_order = self.__parse_money_order_info(order)
+        for index in range(transaction_count):
+            transaction = executed_transactions[index]
+            if 'Открытие вклада' in transaction['description']:
+                last_transaction = self.__parse_deposit_opening_info(transaction)
+            elif 'Перевод' in transaction['description']:
+                last_transaction = self.__parse_money_order_info(transaction)
             else:
                 continue
-            last_order_list.append(last_order)
-        return last_order_list
+            last_transaction_list.append(last_transaction)
+        return last_transaction_list
 
     def __parse_deposit_opening_info(self, transaction):
         """парсинг открытия счета"""
