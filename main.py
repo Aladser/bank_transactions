@@ -1,6 +1,7 @@
 from classes import BankAccount
 
 TRANSACTIONS_FILE = 'data/operations.json'
+TRANSACTIONS_FILE1 = 'data/test_operations.json'
 
 
 def main():
