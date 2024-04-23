@@ -8,7 +8,7 @@ class BankAccount:
         self.transactions_file = transactions_file
 
     def get_executed_transactions(self):
-        """получить выполненные операции"""
+        """получает выполненные операции"""
         executed_transactions = []
         with open(self.transactions_file) as file:
             transactions = json.load(file)
@@ -24,7 +24,7 @@ class BankAccount:
         return sorted_executed_transactions
 
     def get_last_executed_transactions(self, transaction_count=5):
-        """получить последние операции"""
+        """получает последние операции"""
         executed_transactions = self.get_executed_transactions()
         last_transaction_list = []
         transaction_list_len = len(executed_transactions)
